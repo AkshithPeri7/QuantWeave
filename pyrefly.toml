@@ -1,0 +1,8 @@
+# Pyrefly Configuration for QuantWeave Workspace
+# Directs the Pyrefly language server to the backend virtual environment
+
+python-interpreter-path = "apps/api/.venv/Scripts/python.exe"
+search-path = [
+    "apps/api",
+    "scratch"
+]

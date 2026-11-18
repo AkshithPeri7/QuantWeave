@@ -1,0 +1,73 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: "var(--bg)",
+        panel: "var(--panel)",
+        elevated: "var(--elevated)",
+        line: "var(--line)",
+        foreground: "var(--text)",
+        muted: "var(--muted)",
+        accent: "var(--accent)",
+        theme: {
+          bg: "var(--bg)",
+          panel: "var(--panel)",
+          elevated: "var(--elevated)",
+          line: "var(--line)",
+          subtle: "var(--line-subtle)",
+          text: "var(--text)",
+          secondary: "var(--text-secondary)",
+          muted: "var(--muted)",
+          accent: "var(--accent)",
+          "accent-sec": "var(--accent-secondary)",
+          "accent-amber": "var(--accent-amber)",
+          gain: "var(--gain)",
+          loss: "var(--loss)",
+          warn: "var(--warn)",
+        },
+        loom: {
+          base: "#080D19",
+          surface: "#101A2B",
+          elevated: "#142035",
+          border: "#26344A",
+          periwinkle: "#8E91FF",
+          aqua: "#54DCC5",
+          amber: "#F6BE76",
+          text: "#F2F4FF",
+          muted: "#A6B6CC",
+          gain: "#54DCC5",
+          loss: "#F26C6C",
+          warn: "#F6BE76",
+        },
+        qw: {
+          navy: "#080D19",
+          panel: "#101A2B",
+          elevated: "#142035",
+          border: "#26344A",
+          mint: "#54DCC5",
+          blue: "#8E91FF",
+          violet: "#8E91FF",
+          amber: "#F6BE76",
+          text: "#F2F4FF",
+          muted: "#A6B6CC",
+          gain: "#54DCC5",
+          loss: "#F26C6C",
+          warn: "#F6BE76",
+        },
+      },
+      fontFamily: {
+        sans: ["Manrope", "DM Sans", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "SFMono-Regular", "Menlo", "monospace"],
+      },
+    },
+  },
+  plugins: [],
+};
+export default config;

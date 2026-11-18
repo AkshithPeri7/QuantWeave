@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================================
+   CENTRALIZED THEME ENGINE & DESIGN TOKENS
+   ========================================================================= */
+
+/* Theme 1: Signal Loom (Default Institutional Dark) */
+:root,
+[data-theme="signal-loom"] {
+  color-scheme: dark;
+  --bg: #080D19;
+  --panel: #101A2B;
+  --elevated: #142035;
+  --line: #26344A;
+  --line-subtle: #1C2738;
+  --text: #F2F4FF;
+  --text-secondary: #A6B6CC;
+  --muted: #75879F;
+  --accent: #8E91FF;       /* Luminous Periwinkle */
+  --accent-secondary: #54DCC5; /* Signal Aqua */
+  --accent-amber: #F6BE76; /* Warm Amber */
+  --gain: #54DCC5;
+  --loss: #F26C6C;
+  --warn: #F6BE76;
+  --chart-primary: #8E91FF;
+  --chart-secondary: #54DCC5;
+  --chart-tertiary: #F6BE76;
+  --chart-grid: rgba(38, 52, 74, 0.6);
+  --glow-1: rgba(142, 145, 255, 0.12);
+  --glow-2: rgba(84, 220, 197, 0.05);
+  --glow-3: rgba(142, 145, 255, 0.04);
+}
+
+/* Theme 2: Daybreak (Crisp Professional Light) */
+[data-theme="daybreak"] {
+  color-scheme: light;
+  --bg: #F5F7FC;
+  --panel: #FFFFFF;
+  --elevated: #EBF0F8;
+  --line: #D4DEEB;
+  --line-subtle: #E2E8F0;
+  --text: #17243C;
+  --text-secondary: #52627A;
+  --muted: #8292A8;
+  --accent: #5E65DF;
+  --accent-secondary: #148E85;
+  --accent-amber: #D97706;
+  --gain: #0D9488;
+  --loss: #E11D48;
+  --warn: #D97706;
+  --chart-primary: #5E65DF;
+  --chart-secondary: #148E85;
+  --chart-tertiary: #D97706;
+  --chart-grid: rgba(212, 222, 235, 0.8);
+  --glow-1: rgba(94, 101, 223, 0.07);
+  --glow-2: rgba(20, 142, 133, 0.05);
+  --glow-3: rgba(94, 101, 223, 0.03);
+}
+
+/* Theme 3: Nebula (Galactic Ultraviolet Dark) */
+[data-theme="nebula"] {
+  color-scheme: dark;
+  --bg: #120D23;
+  --panel: #1C1530;
+  --elevated: #241936;
+  --line: #382956;
+  --line-subtle: #2D2045;
+  --text: #F8F0FF;
+  --text-secondary: #BCAECC;
+  --muted: #867699;
+  --accent: #B798FF;
+  --accent-secondary: #F3A5CF;
+  --accent-amber: #FCD34D;
+  --gain: #5EEAD4;
+  --loss: #FB7185;
+  --warn: #FCD34D;
+  --chart-primary: #B798FF;
+  --chart-secondary: #F3A5CF;
+  --chart-tertiary: #5EEAD4;
+  --chart-grid: rgba(56, 41, 86, 0.7);
+  --glow-1: rgba(183, 152, 255, 0.12);
+  --glow-2: rgba(243, 165, 207, 0.06);
+  --glow-3: rgba(183, 152, 255, 0.04);
+}
+
+/* Theme 4: Oceanic (Algorithmic Marine Dark) */
+[data-theme="oceanic"] {
+  color-scheme: dark;
+  --bg: #071A1D;
+  --panel: #0C2328;
+  --elevated: #102A30;
+  --line: #1D3D44;
+  --line-subtle: #153036;
+  --text: #EDFDFC;
+  --text-secondary: #9EBFC3;
+  --muted: #698B8F;
+  --accent: #42D6C1;
+  --accent-secondary: #76B6E5;
+  --accent-amber: #FBBF24;
+  --gain: #34D399;
+  --loss: #F87171;
+  --warn: #FBBF24;
+  --chart-primary: #42D6C1;
+  --chart-secondary: #76B6E5;
+  --chart-tertiary: #FBBF24;
+  --chart-grid: rgba(29, 61, 68, 0.7);
+  --glow-1: rgba(66, 214, 193, 0.12);
+  --glow-2: rgba(118, 182, 229, 0.06);
+  --glow-3: rgba(66, 214, 193, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(ellipse 90% 50% at 50% -20%, var(--glow-1), transparent 70%),
+    radial-gradient(circle 800px at 85% 20%, var(--glow-2), transparent 60%),
+    radial-gradient(circle 600px at 15% 75%, var(--glow-3), transparent 60%);
+  color: var(--text);
+  font-family: 'Manrope', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Tabular numbers for financial metrics and numbers */
+.tabular-nums, [data-num] {
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Container shell */
+.shell {
+  width: min(1280px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sora', 'Manrope', sans-serif;
+  letter-spacing: -0.025em;
+  color: var(--text);
+}
+
+/* Keyframe Animations */
+@keyframes weaveFlow {
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes nodePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--accent));
+  }
+}
+
+@keyframes shimmerGlow {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Utility Animation Classes */
+.animate-weave {
+  stroke-dasharray: 8 6;
+  animation: weaveFlow 35s linear infinite;
+}
+
+.animate-pulse-node {
+  animation: nodePulse 3.5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: floatGentle 6s ease-in-out infinite;
+}
+
+.shimmer-badge {
+  background: linear-gradient(90deg, rgba(142, 145, 255, 0.1) 0%, rgba(142, 145, 255, 0.25) 50%, rgba(142, 145, 255, 0.1) 100%);
+  background-size: 200% 100%;
+  animation: shimmerGlow 4s infinite linear;
+}
+
+/* Smooth Interactive Cards */
+.signal-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.signal-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.35), 0 0 20px -6px var(--accent);
+}
+
+.signal-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.25s ease;
+}
+
+.signal-card:hover::after {
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+}
+
+/* Daybreak (Light Mode) Specific Overrides for Native Controls */
+[data-theme="daybreak"] input,
+[data-theme="daybreak"] select,
+[data-theme="daybreak"] textarea {
+  background-color: var(--elevated) !important;
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="daybreak"] input::placeholder,
+[data-theme="daybreak"] textarea::placeholder {
+  color: var(--muted) !important;
+}
+
+/* =========================================================================
+   COMPREHENSIVE MULTI-THEME UTILITY ADAPTER
+   Automatically maps legacy and hardcoded Tailwind palette classes to the active theme!
+   ========================================================================= */
+
+/* DAYBREAK (Light Theme Adapter) */
+[data-theme="daybreak"] [class*="bg-[#080D19]"],
+[data-theme="daybreak"] [class*="bg-[#0e1724]"],
+[data-theme="daybreak"] [class*="bg-[#080e18]"] {
+  background-color: var(--bg) !important;
+}
+
+[data-theme="daybreak"] [class*="bg-[#101A2B]"],
+[data-theme="daybreak"] [class*="bg-[#0c1422]"],
+[data-theme="daybreak"] [class*="bg-[#0f172a]"] {
+  background-color: var(--panel) !important;
+}
+
+[data-theme="daybreak"] [class*="bg-[#142035]"],
+[data-theme="daybreak"] [class*="bg-[#15273b]"] {
+  background-color: var(--elevated) !important;
+}
+
+[data-theme="daybreak"] [class*="border-[#26344A]"],
+[data-theme="daybreak"] [class*="border-[#1e2d3e]"] {
+  border-color: var(--line) !important;
+}
+
+[data-theme="daybreak"] [class*="text-[#F2F4FF]"],
+[data-theme="daybreak"] [class*="text-[#edf3fa]"] {
+  color: var(--text) !important;
+}
+
+[data-theme="daybreak"] [class*="text-[#A6B6CC]"],
+[data-theme="daybreak"] [class*="text-[#91a0b3]"] {
+  color: var(--text-secondary) !important;
+}
+
+/* NEBULA (Purple Dark Theme Adapter) */
+[data-theme="nebula"] [class*="bg-[#080D19]"],
+[data-theme="nebula"] [class*="bg-[#0e1724]"],
+[data-theme="nebula"] [class*="bg-[#080e18]"] {
+  background-color: var(--bg) !important;
+}
+
+[data-theme="nebula"] [class*="bg-[#101A2B]"],
+[data-theme="nebula"] [class*="bg-[#0c1422]"],
+[data-theme="nebula"] [class*="bg-[#0f172a]"] {
+  background-color: var(--panel) !important;
+}
+
+[data-theme="nebula"] [class*="bg-[#142035]"],
+[data-theme="nebula"] [class*="bg-[#15273b]"] {
+  background-color: var(--elevated) !important;
+}
+
+[data-theme="nebula"] [class*="border-[#26344A]"],
+[data-theme="nebula"] [class*="border-[#1e2d3e]"] {
+  border-color: var(--line) !important;
+}
+
+[data-theme="nebula"] [class*="text-[#F2F4FF]"],
+[data-theme="nebula"] [class*="text-[#edf3fa]"] {
+  color: var(--text) !important;
+}
+
+[data-theme="nebula"] [class*="text-[#A6B6CC]"],
+[data-theme="nebula"] [class*="text-[#91a0b3]"] {
+  color: var(--text-secondary) !important;
+}
+
+/* OCEANIC (Teal Dark Theme Adapter) */
+[data-theme="oceanic"] [class*="bg-[#080D19]"],
+[data-theme="oceanic"] [class*="bg-[#0e1724]"],
+[data-theme="oceanic"] [class*="bg-[#080e18]"] {
+  background-color: var(--bg) !important;
+}
+
+[data-theme="oceanic"] [class*="bg-[#101A2B]"],
+[data-theme="oceanic"] [class*="bg-[#0c1422]"],
+[data-theme="oceanic"] [class*="bg-[#0f172a]"] {
+  background-color: var(--panel) !important;
+}
+
+[data-theme="oceanic"] [class*="bg-[#142035]"],
+[data-theme="oceanic"] [class*="bg-[#15273b]"] {
+  background-color: var(--elevated) !important;
+}
+
+[data-theme="oceanic"] [class*="border-[#26344A]"],
+[data-theme="oceanic"] [class*="border-[#1e2d3e]"] {
+  border-color: var(--line) !important;
+}
+
+[data-theme="oceanic"] [class*="text-[#F2F4FF]"],
+[data-theme="oceanic"] [class*="text-[#edf3fa]"] {
+  color: var(--text) !important;
+}
+
+[data-theme="oceanic"] [class*="text-[#A6B6CC]"],
+[data-theme="oceanic"] [class*="text-[#91a0b3]"] {
+  color: var(--text-secondary) !important;
+}
+
+/* Respect Accessibility Preferences (prefers-reduced-motion) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html.reduced-motion *,
+html.reduced-motion *::before,
+html.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Custom Scrollbars adhering to active theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: min(100% - 32px, 1280px);
+  }
+}

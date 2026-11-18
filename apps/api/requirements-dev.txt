@@ -1,0 +1,5 @@
+# Development and E2E Testing Dependencies
+-r requirements.txt
+
+# Playwright E2E browser automation & UI testing
+playwright>=1.40.0,<2
